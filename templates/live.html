@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <a style="padding:1.25rem;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;text-decoration: none;font-size:1.5rem; color:#5B2C6F; margin: 2.7rem;font-weight: bold;" href="{{ url_for('live') }}"><b style="animation: animate 2.5s linear infinite;">Live Matches</b></a>
+    <table style="padding:1rem;margin-left:auto;margin-right:auto;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">
+        <tr>
+            {% for team in teams %}
+                <td style="padding:1rem;"><a href="{{ url_for('team',t=team) }}"><b style="font-size:1.5rem;">{{team}}</b></a></td>
+            {% endfor %}
+        </tr>
+    </table>
+    <br>
+    <form action="/" method="get">
+        <div style="margin-top:.5rem;text-align: center;color: white;font-size: 30px;" class="left";>
+            <input type="text" name="player" class="player form-control"
+                   placeholder="Enter the Player Name"
+                   style="background-color: #ffffff;border-color:#ffffff;width: 30%;height: 30px;color: #181818" required="required"
+                   onkeyup="playersearchfunc()" id="playersearch" >
+            <br>
+            <input type="submit" class="btn btn-primary btn-block player-button" style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px;height:40px;" ><br><br>
+        </div>
+    </form>
+    <div style="text-align:center;">
+
+        <h1 style="text-align:center;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">Live Fixture</h1>
+        {% for matchsum in livescores %}
+            <div style="text-align:center;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;margin-right:30%;margin-left:30%;margin-bottom:1rem;">
+                <a href="{{ url_for('livescorecard',index=matchsum) }}">
+                    <h1>{{ livescores[matchsum]['status'] }}</h1>&nbsp;&nbsp;&nbsp;<br>
+                    <span>{{ livescores[matchsum]['description'] }}</span>&nbsp;&nbsp;&nbsp;<br>
+                    <h3>{{ livescores[matchsum]['Team_1'][0] }}</h3> &nbsp;&nbsp;&nbsp;
+                    {{ livescores[matchsum]['Team_1'][1] }} &nbsp;&nbsp;&nbsp;
+                    {{ livescores[matchsum]['Team_1'][2] }} &nbsp;&nbsp;&nbsp;<br>
+                    <h3>{{ livescores[matchsum]['Team_2'][0] }}</h3> &nbsp;&nbsp;&nbsp;
+                    {{ livescores[matchsum]['Team_2'][1] }} &nbsp;&nbsp;&nbsp;
+                    {{ livescores[matchsum]['Team_2'][2] }} &nbsp;&nbsp;&nbsp;<br>
+                    {{ livescores[matchsum]['status-text'] }}&nbsp;&nbsp;&nbsp;<br><br><br><br>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='playersearch.js')}}"></script>
+
+{% endblock content %}

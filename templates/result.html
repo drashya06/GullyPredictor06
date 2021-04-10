@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <a style="padding:1.25rem;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;text-decoration: none;font-size:1.5rem; color:#5B2C6F; margin: 2.7rem;font-weight: bold;" href="{{ url_for('live') }}"><b style="animation: animate 2.5s linear infinite;">Live Matches</b></a>
+    <table style="padding:1rem;margin-left:auto;margin-right:auto;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">
+        <tr>
+            {% for team in teams %}
+                <td style="padding:1rem;"><a href="{{ url_for('team',t=team) }}"><b style="font-size:1.5rem;">{{team}}</b></a></td>
+            {% endfor %}
+        </tr>
+    </table>
+    <br>
+    <form action="/" method="get">
+        <div style="margin-top:.5rem;text-align: center;color: white;font-size: 30px;" class="left";>
+            <input type="text" name="player" class="player form-control"
+                   placeholder="Enter the Player Name"
+                   style="background-color: #ffffff;border-color:#ffffff;width: 30%;height: 30px;color: #181818" required="required"
+                   onkeyup="playersearchfunc()" id="playersearch" >
+            <br>
+            <input type="submit" class="btn btn-primary btn-block player-button" style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px;height:40px;" ><br><br>
+        </div>
+    </form>
+{% endblock content %}

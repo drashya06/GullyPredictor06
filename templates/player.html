@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <a style="padding:1.25rem;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;text-decoration: none;font-size:1.5rem; color:#5B2C6F; margin: 2.7rem;font-weight: bold;" href="{{ url_for('live') }}"><b style="animation: animate 2.5s linear infinite;">Live Matches</b></a>
+    <table style="padding:1rem;margin-left:auto;margin-right:auto;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">
+        <tr>
+            {% for team in teams %}
+                <td style="padding:1rem;"><a href="{{ url_for('team',t=team) }}"><b style="font-size:1.5rem;">{{team}}</b></a></td>
+            {% endfor %}
+        </tr>
+    </table>
+    <br>
+     <div style="float:center;padding:2rem;margin-right:35%;margin-left:35%;">
+        <img src="{{img}}" alt="playerimage" style="float:center;padding:2rem;">
+        {% for inf in info %}
+            <p>
+                <b>{{inf}}</b>
+                <span>{{info[inf]}}</span>
+            </p>
+        {% endfor %}
+    </div>
+    <div style="padding:1rem;margin-right:35%;margin-left:35%;">
+        {% for i in range(table_length) %}
+            <b>{{ table_info[i] }}<br></b>
+            {{ tables[i]|safe }}<br><br>
+        {% endfor %}
+    </div>
+{% endblock content %}

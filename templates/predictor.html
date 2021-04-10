@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <a style="padding:1.25rem;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;text-decoration: none;font-size:1.5rem; color:#5B2C6F; margin: 2.7rem;font-weight: bold;" href="{{ url_for('live') }}"><b style="animation: animate 2.5s linear infinite;">Live Matches</b></a>
+    <table style="padding:1rem;margin-left:auto;margin-right:auto;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">
+        <tr>
+            {% for team in teams %}
+                <td style="padding:1rem;"><a href="{{ url_for('team',t=team) }}"><b style="font-size:1.5rem;">{{team}}</b></a></td>
+            {% endfor %}
+        </tr>
+    </table>
+
+<!--Team 1-->
+
+    <br>
+    <h1 style="text-align:center;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">Team {{team1}}</h1>
+    <table style="text-align:center;margin-left:auto;margin-right:auto;">
+        {% for i in range(0,num_players_t1,5) %}
+            <tr style="padding:1.5rem;text-align:center;">
+                {% for j in range(5) %}
+                    <td style="padding:1rem;text-align:center;
+                    background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">
+                        <a style="text-decoration: none;" href="{{url_for('player',name=squad1[i+j])}}">
+                            <h3><b style="color:#5B2C6F;">{{squad1[i+j]}}</b><br><br></h3>
+                            {% for inn in t1_predict[squad1[i+j]] %}
+                                <span>Inning : {{ inn }}<br></span>
+                                {% for inf in t1_predict[squad1[i+j]][inn] %}
+                                    <span><b>{{ inf }}</b> &nbsp;&nbsp;&nbsp;
+                                    {{ t1_predict[squad1[i+j]][inn][inf] }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endfor %}
+                        </a>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+
+<!-- Team 2   -->
+
+    <br>
+    <h1 style="text-align:center;background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">Team {{team2}}</h1>
+    <table style="text-align:center;margin-left:auto;margin-right:auto;">
+        {% for i in range(0,num_players_t2,5) %}
+            <tr style="padding:1.5rem;text-align:center;">
+                {% for j in range(5) %}
+                    <td style="padding:1rem;text-align:center;
+                    background: linear-gradient(to bottom, #ffffff 0%, #666699 100%);box-shadow: 10px 10px 5px grey;">
+                        <a style="text-decoration: none;" href="{{url_for('player',name=squad2[i+j])}}">
+                            <h3><b style="color:#5B2C6F;">{{squad2[i+j]}}</b><br><br></h3>
+                            {% for inn in t2_predict[squad2[i+j]] %}
+                                <span>Inning : {{ inn }}<br></span>
+                                {% for inf in t2_predict[squad2[i+j]][inn] %}
+                                    <span><b>{{ inf }}</b> &nbsp;&nbsp;&nbsp;
+                                    {{ t2_predict[squad2[i+j]][inn][inf] }}</span>
+                                    <br>
+                                {% endfor %}
+                            {% endfor %}
+                        </a>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}
+
+
+
+
+
+<!--                            <img src="{{player_img_t2[squad2[i+j]][0]}}" alt=""><br>-->
+<!--                            <img src="{{player_img_t1[squad1[i+j]][0]}}" alt=""><br>-->
